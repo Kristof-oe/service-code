@@ -1,0 +1,45 @@
+name: Run and test
+
+on:
+  pull_request:
+    branches: [main]
+
+env:
+  BRANCH: ${{ github.ref }}
+
+permissions:
+  contents: read
+  id-token: write   # lets the job get an OIDC token
+
+jobs:
+  Test:
+    runs-on: ubuntu-24.04-arm
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup
+      uses: astral-sh/setup-uv@v10
+      with:
+        python-version: 3.13t
+
+    - name: Testing
+      run: |
+        uv run python -m unittest -v
+
+    - name: Oidc
+      uses: aws-actions/configure-aws-credentials@v6
+      with:
+        role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+        aws-region: ${{ vars.AWS_REGION }}
+
+    - name: Login ecr
+      uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Version
+      id: version
+      run: echo "version=$(uv version --short)" >> "$GITHUB_OUTPUT"
+
+    - name: Build docker
+      run: |
+        docker build -t ${{ vars.REPOSITORY_URL }}:${{ steps.version.outputs.version }} app/
