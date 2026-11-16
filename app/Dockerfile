@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN uv sync --locked
+RUN uv sync
 
 EXPOSE 8000
 
