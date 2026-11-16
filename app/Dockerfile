@@ -10,4 +10,4 @@ RUN uv sync
 
 EXPOSE 8000
 
-CMD [ "uv" "run" "app.py"]
+CMD ["uv", "run", "app.py"]
