@@ -7,13 +7,14 @@ on:
 env:
   BRANCH: ${{ github.ref }}
 
-permissions:
-  contents: read
-  id-token: write   # lets the job get an OIDC token
+
 
 jobs:
   Test:
     runs-on: ubuntu-24.04-arm
+    permissions:
+      contents: read
+      id-token: write   # lets the job get an OIDC token
     steps:
     - name: Checkout
       uses: actions/checkout@v4
