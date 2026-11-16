@@ -26,7 +26,7 @@ jobs:
 
     - name: Sync
       run: |
-        uv pip install . 
+        uv sync
 
 
     - name: Testing

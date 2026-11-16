@@ -23,9 +23,10 @@ jobs:
       with:
         python-version: 3.13
 
+    
     - name: Sync
       run: |
-        uv pip install . 
+        uv sync
 
 
     - name: Testing
