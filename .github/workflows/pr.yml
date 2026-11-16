@@ -22,7 +22,7 @@ jobs:
     - name: Setup
       uses: astral-sh/setup-uv@v4
       with:
-        python-version: 3.13t
+        python-version: 3.13
 
     - name: Testing
       run: |
