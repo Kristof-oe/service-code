@@ -25,7 +25,17 @@ jobs:
 
     - name: Testing
       run: |
-        uv run python -m unittest -v
+        uv run python -m unittest discover -v
+
+  Build:
+    needs: Test
+    runs-on: ubuntu-24.04-arm
+    permissions:
+      contents: read
+      id-token: write   # lets the job get an OIDC token
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
 
     - name: Oidc
       uses: aws-actions/configure-aws-credentials@v6
