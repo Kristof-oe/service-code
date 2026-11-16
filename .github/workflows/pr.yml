@@ -11,7 +11,7 @@ env:
 
 jobs:
   Test:
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       id-token: write   # lets the job get an OIDC token
@@ -35,7 +35,7 @@ jobs:
 
   Build:
     needs: Test
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       id-token: write   # lets the job get an OIDC token
